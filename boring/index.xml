@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Boring on 刍狗狗の小窝</title>
+    <link>https://ydw.be/boring/</link>
+    <description>Recent content in Boring on 刍狗狗の小窝</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 23 Sep 2020 23:11:37 +0200</lastBuildDate><atom:link href="https://ydw.be/boring/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IPv6 with DigitalOcean and WireGuard</title>
+      <link>https://ydw.be/boring/ipv6-wireguard/</link>
+      <pubDate>Wed, 23 Sep 2020 23:11:37 +0200</pubDate>
+      
+      <guid>https://ydw.be/boring/ipv6-wireguard/</guid>
+      <description>My ISP doesn&amp;rsquo;t support IPv6 yet, I managed to have IPv6 connection by proxying through a DigitalOcean IPv6 server with WireGuard.
+First, create a DigitalOcean droplet with IPv6 enabled.
+According to the DigitalOcean IPv6 documentation, the subnet is /124, so it provides 16 IPv6 addresses to a droplet.
+vim /etc/sysctl.conf
+net.ipv4.ip_forward=1 net.ipv6.conf.all.forwarding=1 sysctl -p to load the /etc/sysctl.conf file.
+Installing WireGuard according to https://www.wireguard.com/install.
+On the DigitalOcean server, run
+wg genkey &amp;gt; privatekey wg pubkey &amp;lt; privatekey &amp;gt; publickey On your client, also run the same commands to generate the private key and the corresponding public key (Your OS may have a WireGuard App that does it for you with clicking some buttons)</description>
+    </item>
+    
+    <item>
+      <title>Command</title>
+      <link>https://ydw.be/boring/command/</link>
+      <pubDate>Sun, 28 Jun 2020 15:49:20 +0200</pubDate>
+      
+      <guid>https://ydw.be/boring/command/</guid>
+      <description>DNS nslookup -type=A google.com 1.1.1.1 host google.com 1.1.1.1 dig google.com Generate a test certificate for localhost openssl req -x509 -sha256 -nodes -addext &amp;#34;subjectAltName = DNS:localhost&amp;#34; -newkey rsa:2048 -days 365 -keyout localhost.key -out localhost.crt </description>
+    </item>
+    
+    <item>
+      <title>Insomni’Hack Teaser 2020 - Welcome - Writeup</title>
+      <link>https://ydw.be/boring/insomnihackteaser-welcome/</link>
+      <pubDate>Sun, 19 Jan 2020 14:35:42 +0100</pubDate>
+      
+      <guid>https://ydw.be/boring/insomnihackteaser-welcome/</guid>
+      <description>This year we added a Proof of Work to some of our challenges. Just run python pow.py &amp;lt;target&amp;gt;, were target is the value provided by the server and get the flag. pow nc welcome.insomnihack.ch 1337 Run nc welcome.insomnihack.ch 1337, we get
+====================================================================== ============ Welcome to the Insomni&#39;Hack Teaser 2020! ============ ====================================================================== Give me an input whose md5sum starts with &amp;quot;1a3a7e&amp;quot; and get the flag ;) I completely forgot that there is a pow.</description>
+    </item>
+    
+    <item>
+      <title>OverTheWire Advent 2019 Day24 - Got shell - Writeup</title>
+      <link>https://ydw.be/boring/aotw2019-day24/</link>
+      <pubDate>Sat, 28 Dec 2019 01:34:16 +0100</pubDate>
+      
+      <guid>https://ydw.be/boring/aotw2019-day24/</guid>
+      <description>Visit the link, we get the web server&amp;rsquo;s c++ code.
+#include &amp;#34;crow_all.h&amp;#34;#include &amp;lt;cstdio&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;memory&amp;gt;#include &amp;lt;stdexcept&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;array&amp;gt;#include &amp;lt;sstream&amp;gt; std::string exec(const char* cmd) { std::array&amp;lt;char, 128&amp;gt; buffer; std::string result; std::unique_ptr&amp;lt;FILE, decltype(&amp;amp;pclose)&amp;gt; pipe(popen(cmd, &amp;#34;r&amp;#34;), pclose); if (!pipe) { return std::string(&amp;#34;Error&amp;#34;); } while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) { result += buffer.data(); } return result; } int main() { crow::SimpleApp app; app.loglevel(crow::LogLevel::Warning); CROW_ROUTE(app, &amp;#34;/&amp;#34;) ([](const crow::request&amp;amp; req) { std::ostringstream os; if(req.url_params.get(&amp;#34;cmd&amp;#34;) != nullptr){ os &amp;lt;&amp;lt; exec(req.</description>
+    </item>
+    
+    <item>
+      <title>OverTheWire Advent 2019 Day0 - Challenge Zero - Writeup</title>
+      <link>https://ydw.be/boring/aotw2019-day0/</link>
+      <pubDate>Fri, 27 Dec 2019 21:56:19 +0100</pubDate>
+      
+      <guid>https://ydw.be/boring/aotw2019-day0/</guid>
+      <description>On https://advent2019.overthewire.org/challenge-zero we are presented with a fireplace gif.
+I first thought it&amp;rsquo;s a forensic challenge with the fireplace gif, but couldn&amp;rsquo;t find anything abnormal in the image. Then I checked the source code of the page.
+&amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;Fireplace&amp;lt;/title&amp;gt; &amp;lt;!-- browser detected: chrome --&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;img style=&amp;#34;width:400px;&amp;#34; src=&amp;#34;/flames.gif&amp;#34;&amp;gt;&amp;lt;pre&amp;gt;Fox! Fox! Burning bright! In the forests of the night! Hint: $ break *0x7c00&amp;lt;/pre&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; We see that the server detects our browser and responds accordingly.</description>
+    </item>
+    
+  </channel>
+</rss>
